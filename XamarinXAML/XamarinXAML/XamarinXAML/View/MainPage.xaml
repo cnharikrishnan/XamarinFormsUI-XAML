@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             mc:Ignorable="d"
+             x:Class="XamarinXAML.MainPage">
+
+    <StackLayout>
+        <Label Text="XAML DEMO" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" BackgroundColor="LightGray" TextColor="Black" FontSize="40" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HeightRequest="100"/>
+        <Label Text="ROTATION" 
+               BindingContext="{x:Reference Name=slider}" 
+               Rotation="{Binding Path=Value}" FontAttributes="Bold" 
+               FontSize="Large" HorizontalOptions="Center" 
+               VerticalOptions="CenterAndExpand" />
+        <Switch x:Name="switch" HorizontalOptions="Center" />
+        <Slider x:Name="slider" HeightRequest="50"
+                IsEnabled="{Binding IsToggled, Source={x:Reference switch}}" 
+                Maximum="360" VerticalOptions="CenterAndExpand" />
+        <Label BindingContext="{x:Reference slider}" 
+               Text="{Binding Value, StringFormat='The angle is {0:F0} degrees'}"
+               FontAttributes="Bold" FontSize="Large" 
+               HorizontalOptions="Center" 
+               VerticalOptions="CenterAndExpand" />
+    </StackLayout>
+
+</ContentPage>

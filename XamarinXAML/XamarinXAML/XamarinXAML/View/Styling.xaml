@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             mc:Ignorable="d"
+             x:Class="XamarinXAML.View.Styling">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="BoxView" Class="Separator">
+                <Setter Property="BackgroundColor" Value="Gray" />
+                <Setter Property="HeightRequest" Value="1" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="BackgroundColor" Value="LightGray" />
+                <Setter Property="VerticalOptions" Value="StartAndExpand" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="FontSize" Value="40" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HeightRequest" Value="100" />
+            </Style>
+            <Style x:Key="baseStyle" TargetType="Label">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="labelRedStyle" TargetType="Label" BasedOn="{StaticResource baseStyle}">
+                <Setter Property="TextColor" Value="Red" />
+            </Style>
+            <Style x:Key="labelBlueStyle" TargetType="Label" BasedOn="{StaticResource baseStyle}">
+                <Setter Property="TextColor" Value="Blue" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <Label Text="STYLING DEMO" />
+        <Label Text="ROTATION" 
+               BindingContext="{x:Reference Name=slider}" 
+               Rotation="{Binding Path=Value}" 
+               Style="{StaticResource labelRedStyle}" />
+        <Switch x:Name="switch" HorizontalOptions="Center" Toggled="SwitchToggled" />
+        <BoxView StyleClass="Separator" />
+        <Slider x:Name="slider" HeightRequest="50"
+                IsEnabled="{Binding IsToggled, Source={x:Reference switch}}" 
+                Maximum="360" 
+                VerticalOptions="CenterAndExpand" />
+        <Label BindingContext="{x:Reference slider}" 
+               Text="{Binding Value, StringFormat='The angle is {0:F0} degrees'}" 
+               Style="{DynamicResource dynamicLabelStyle}"/>
+    </StackLayout>
+</ContentPage>
